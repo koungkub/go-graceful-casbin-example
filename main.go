@@ -20,7 +20,7 @@ func main() {
 
 	e := echo.New()
 
-	casbin, err := casbin.NewEnforcer("./model.conf", "./policy.csv")
+	casbin, err := casbin.NewEnforcerSafe("./model.conf", "./policy.csv")
 	if err != nil {
 		log.Println(err)
 	}
@@ -53,7 +53,7 @@ func casbinRule(casbin *casbin.Enforcer) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return echo.HandlerFunc(func(c echo.Context) error {
 
-			res, err := casbin.Enforce("koung", c.Request().URL.String(), c.Request().Method)
+			res, err := casbin.EnforceSafe("koung", c.Request().URL.String(), c.Request().Method)
 			if err != nil {
 				log.Fatal(errors.WithMessage(err, "res error (casbin)"))
 			}
