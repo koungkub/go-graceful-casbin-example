@@ -1,0 +1,7 @@
+p, admin, /*, *
+p, user, /user/*, *
+p, staff, /staff, *
+p, anoy, /anoy, *
+
+g, koung, user
+g, eiei, staff
